@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wangxien - My Portfolio</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Seorang Freelance dan pengembang bot WhatsApp yang antusias, fokus pada JavaScript dan menciptakan fitur yang berguna dan fungsional.">
+    <meta name="keywords" content="Portfolio, Wangxien, JavaScript, Bot Developer">
+    <meta name="author" content="Wangxien">
+    <meta name="theme-color" content="#a855f7">
+    <meta property="og:title" content="Wangxien - My Portfolio">
+    <meta property="og:description" content="Seorang Freelance dan pengembang bot WhatsApp yang antusias, fokus pada JavaScript dan menciptakan fitur yang berguna dan fungsional.">
+    <meta property="og:image" content="https://files.catbox.moe/bvgaxu.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wangxien - My Portfolio">
+    <meta name="twitter:image" content="https://files.catbox.moe/bvgaxu.jpg">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap');
+        
+        :root {
+            --bg-color: #0d0c1d;
+            --card-bg: rgba(20, 18, 38, 0.6);
+            --primary-accent: #a855f7;
+            --secondary-accent: #f472b6;
+            --tertiary-accent: #38bdf8;
+            --text-color: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --font-main: "Jost", sans-serif;
+            --font-secondary: "Poppins", sans-serif;
+            --glow-color: rgba(168, 85, 247, 0.6);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), rgba(168, 85, 247, 0.15), transparent 25vw),
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: cover, 35px 35px;
+            cursor: none;
+        }
+        .custom-cursor { width: 30px; height: 30px; border: 1px solid var(--secondary-accent); border-radius: 50%; position: fixed; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease; }
+        .custom-cursor.hover { background-color: rgba(244, 114, 182, 0.2); transform: translate(-50%, -50%) scale(1.5); }
+
+        .background-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .aurora { width: 100%; height: 100%; position: relative; }
+        .aurora-item {
+            position: absolute; width: 60vmax; height: 60vmax;
+            border-radius: 50%; opacity: 0.2;
+            filter: blur(120px); mix-blend-mode: screen;
+            animation: aurora-move 20s infinite alternate;
+            transition: transform 0.6s ease-out;
+        }
+        #aurora-1 { background-color: var(--primary-accent); top: -25%; right: -15%; }
+        #aurora-2 { background-color: var(--tertiary-accent); bottom: -25%; left: -15%; animation-delay: 8s; }
+        @keyframes aurora-move { 100% { transform: translate(150px, 100px) scale(1.3) rotate(15deg); } }
+
+        .section-container { max-width: 1024px; margin: 0 auto; padding: 6rem 1.5rem; }
+        .section-card {
+            background: var(--card-bg); backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
+            padding: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-card.is-visible { opacity: 1; transform: translateY(0); }
+        
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(13, 12, 29, 0.7); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 50;
+        }
+        .nav-content { max-width: 1152px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 4rem; }
+        .nav-brand { font-size: 1.25rem; font-weight: bold; }
+        .nav-links a { color: var(--text-muted); transition: color 0.3s, text-shadow 0.3s; padding: 0.5rem 1rem; text-decoration: none; cursor: none; }
+        .nav-links a:hover { color: white; text-shadow: 0 0 10px var(--primary-accent); }
+        
+        #home { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .hero-avatar { width: 144px; height: 144px; border-radius: 50%; margin: 0 auto 1.5rem; border: 4px solid rgba(255,255,255,0.2); box-shadow: 0 0 30px var(--glow-color); }
+        .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 0.5rem; background: linear-gradient(135deg, white, var(--primary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-family: var(--font-secondary); font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-muted); margin-bottom: 1.5rem; }
+        .hero-summary { font-family: var(--font-secondary); max-width: 600px; margin: 0 auto 2rem; color: var(--text-muted); }
+        #typing-cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { color: var(--secondary-accent); } }
+        
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; transition: all 0.3s ease; border: 1px solid transparent; text-decoration: none; cursor: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); color: white; box-shadow: 0 5px 15px rgba(192, 132, 252, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(192, 132, 252, 0.4); }
+        .btn-secondary { border-color: var(--text-muted); color: var(--text-muted); }
+        .btn-secondary:hover { border-color: white; background-color: rgba(255,255,255,0.1); color: white; }
+        
+        .section-title { font-size: 2.25rem; font-weight: bold; text-align: center; margin-bottom: 4rem; background: linear-gradient(135deg, white, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-grid { display: grid; gap: 1.5rem; }
+        .skills-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .project-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .contact-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+        
+        .info-card, .project-card, .contact-link, .interest-card { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: var(--text-color); }
+        .info-card:hover, .project-card:hover, .contact-link:hover, .interest-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .tech-tag { display: inline-block; background: rgba(255,255,255,0.1); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; color: var(--text-muted); border: 1px solid transparent; transition: all 0.2s ease; }
+        .tech-tag:hover { border-color: var(--primary-accent); color: white; }
+        
+        .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .project-card {
+        background: rgba(255, 255, 215, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+        
+        /* THE PERMANENT FIX: Flexbox Column Layout */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0);
+    }
+
+    .project-card h3 {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-color);
+    }
+
+    .project-card p {
+        font-family: var(--font-secondary);
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        
+        /* THE MAGIC: This makes the description grow to fill space */
+        flex-grow: 0; 
+    }
+
+    .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+        display: inline-block;
+        background: rgba(168, 85, 247, 0.15); /* Purple tint */
+        color: var(--primary-accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+        
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 3px; background: rgba(255,255,255,0.1); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
+        .timeline-item { padding: 1rem 3rem; position: relative; width: 50%; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .timeline-item.is-visible { opacity: 1; transform: translateY(0); }
+        .timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: var(--bg-color); border: 4px solid var(--primary-accent); top: 1.5rem; border-radius: 50%; z-index: 1; }
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { left: 50%; }
+        .timeline-item:nth-child(even)::after { left: -10px; }
+        .timeline-content { padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px; }
+        
+        .audio-bubble { position: fixed; bottom: 25px; right: 25px; width: 70px; height: 70px; z-index: 9999; cursor: grab; }
+        .audio-bubble-inner { width: 100%; height: 100%; background: var(--card-bg); backdrop-filter: blur(20px); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1); display: grid; place-items: center; position: relative; }
+        #visualizer-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .audio-bubble-button { z-index: 1; background: none; border: none; cursor: pointer; width: 100%; height: 100%; display: grid; place-items: center; }
+        .audio-bubble-button svg { width: 22px; height: 22px; fill: var(--text-color); }
+        
+        #mobile-menu-btn, #mobile-menu { display: none; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            #mobile-menu-btn { display: block; background: none; border: none; color: white; cursor: pointer; }
+            #mobile-menu.open { display: block; padding: 1rem; background: rgba(13, 12, 29, 0.9); }
+            #mobile-menu a { display: block; padding: 0.75rem 0; text-decoration: none; color: var(--text-muted); }
+            .timeline::after { left: 10px; }
+            .timeline-item { width: 100%; padding-left: 3rem; padding-right: 1rem; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after { left: 1px; }
+            .audio-bubble { bottom: 15px; right: 15px; width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-cursor"></div>
+    <div class="background-wrapper"><div class="aurora"><div class="aurora-item" id="aurora-1"></div><div class="aurora-item" id="aurora-2"></div></div></div>
+    
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Wangxien</div>
+            <div class="nav-links"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#projects">Projects</a><a href="#interests">Interests</a><a href="#playlist">Playlist</a><a href="#contact">Contact</a></div>
+            <button id="mobile-menu-btn"><i class="fas fa-bars text-xl"></i></button>
+        </div>
+        <div id="mobile-menu"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#projects">Projects</a><a href="#interests">Interests</a><a href="#playlist">Playlist</a><a href="#contact">Contact</a></div>
+    </nav>
+    
+    <main>
+        <section id="home" class="section-container">
+            <div class="text-center">
+                <img src="https://files.catbox.moe/bvgaxu.jpg" alt="Wangxien" class="hero-avatar">
+                <h1 class="hero-title">Wangxien</h1>
+                <p class="hero-subtitle" id="job-title-animated">Freelance<span id="typing-cursor">|</span></p>
+                <p class="hero-summary">Saya seorang pengembang dan freelance yang antusias, selalu ingin tahu dan suka mengubah ide menjadi kenyataan melalui kode.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="https://github.com/ZiennDevv" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-container">
+            <div class="section-card">
+                <h2 class="section-title">About Me</h2>
+                <div class="info-card text-center max-w-2xl mx-auto">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-accent">Personal Snapshot</h3>
+                    <div class="space-y-3 font-secondary">
+                        <p><i class="fas fa-user-circle fa-fw mr-2 text-tertiary-accent"></i><strong>Nama:</strong> Rian Septiana</p>
+                        <p><i class="fas fa-map-marker-alt fa-fw mr-2 text-tertiary-accent"></i><strong>Asal:</strong> Pangandaran, Indonesia</p>
+                        <p class="italic"><i class="fas fa-quote-left fa-fw mr-2 text-tertiary-accent"></i>Mengejar Impian Bukanlah Hal Yang Mudah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-container">
+             <div class="section-card">
+                <h2 class="section-title">Kemampuan & Pengalaman</h2>
+                <div class="card-grid skills-grid">
+                    <div class="info-card text-center">
+                        <i class="fas fa-code text-4xl mb-4 text-primary-accent"></i><h3 class="text-xl font-semibold mb-4">Keahlian</h3>
+                        <div class="flex flex-wrap gap-2 justify-center"><span class="tech-tag">Mahir dalam pengoperasian sarana prasana kantor</span><span class="tech-tag">Memiliki Jiwa Leadership</span></div>
+                    </div>
+                    <div class="info-card text-center">
+                        <i class="fas fa-tools text-4xl mb-4 text-tertiary-accent"></i><h3 class="text-xl font-semibold mb-4">Pengalaman</h3>
+                        <div class="flex flex-wrap gap-2 justify-center"><span class="tech-tag">Cashier</span><span class="tech-tag">Arsiparis</span><span class="tech-tag">Kurir Cash Or Duel</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="journey" class="section-container">
+            <div class="section-card">
+                <h2 class="section-title">My Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-content"><h3 class="font-bold text-lg mb-1">Chapter I: The Hermit Era (2020-2023)</h3><p class="font-secondary text-sm text-text-muted">Memasuki gerbang SMK, sebuah portal menuju realita dan tantangan baru.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><h3 class="font-bold text-lg mb-1">New World: The Awakening (2024)</h3><p class="font-secondary text-sm text-text-muted">Menyelami kehidupan dewasa yang begitu pahit dan bertaruh dengan kerasnya dunia.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><h3 class="font-bold text-lg mb-1">Self-development (2024)</h3><p class="font-secondary text-sm text-text-muted">Mulai bersosialisasi dengan cara menjadi abang kurir.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><h3 class="font-bold text-lg mb-1">Laying The Foundation (2025)</h3><p class="font-secondary text-sm text-text-muted">Membangun finansial yang baik, untuk istri dan anak dimasa depan.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-container">
+            <div class="section-card">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="card-grid project-grid">
+                    <div class="project-card"><h3 class="font-bold text-lg mb-2">WhatsApp Bot</h3><p class="font-secondary text-sm text-text-muted mb-4">Bot interaktif untuk otomatisasi tugas seperti membuat stiker, mengunduh media, dan lainnya.</p><div class="flex flex-wrap gap-2 mb-4"><span class="tech-tag">Node.js</span><span class="tech-tag">Baileys-MD</span></div><a href="https://github.com" target="_blank" class="btn-secondary text-sm px-4 py-2">View on GitHub <i class="fas fa-arrow-right ml-1"></i></a></div>
+                    <div class="project-card"><h3 class="font-bold text-lg mb-2">Business Store</h3><p class="font-secondary text-sm text-text-muted mb-4">Menyediakan Jasa Topup Dengan Harga Terjangkau.</p><div class="flex flex-wrap gap-2 mb-4"><span class="tech-tag">CEO</span><span class="tech-tag">Reseller</span></div><a href="https://wa.me/6285176729049" target="_blank" class="btn-secondary text-sm px-4 py-2">Order Now? <i class="fas fa-arrow-right ml-1"></i></a></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests" class="section-container">
+            <div class="section-card">
+                <h2 class="section-title">Personal Interests</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="info-card text-center">
+                        <h3 class="text-xl font-semibold mb-6 text-primary-accent">Favorite Anime</h3>
+                        <div class="space-y-4 font-secondary"><p>The Duke of Death and His Maid</p><p>Gotoubun No Hayanome</p><p>Kakkou no Iinazuke</p></div>
+                    </div>
+                <div class="info-card text-center">
+                        <h3 class="text-xl font-semibold mb-6 text-primary-accent">Favorite Donghua</h3>
+                        <div class="space-y-4 font-secondary"><p>Battle Through The Heaven</p><p>Perfect World</p><p>Renegade Immortal</p></div>
+                    </div>
+                    <div class="info-card text-center">
+                        <h3 class="text-xl font-semibold mb-6 text-primary-accent">Favorite Characters</h3>
+                        <div class="space-y-4 font-secondary"><p>Alice Lendrott (Bocchan)</p><p>Nakano Nino (Gotoubun)</p><p>Maria Kujou (Roshidere)</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="playlist" class="section-container">
+             <div class="section-card">
+                <h2 class="section-title">My Playlist</h2>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2vQuHFGtAlFjkCwdkzAoLk?si=-dyGQOKdSRWfKUKWTubPTA&pi=1z5VoIBHTUeRr?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section id="contact" class="section-container">
+            <div class="section-card">
+                <h2 class="section-title">Let's Connect</h2>
+                <div class="text-center max-w-3xl mx-auto">
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed font-secondary">Tertarik untuk berkolaborasi? Mari kita ciptakan sesuatu yang luar biasa bersama!</p>
+                    <div class="card-grid contact-grid">
+                        <a href="https://wa.me/6285176729049" target="_blank" class="contact-link text-center"><i class="fab fa-whatsapp text-3xl mb-3 text-primary-accent"></i><p>WhatsApp</p></a>
+                        <a href="https://www.instagram.com/ianneedfreedom_" target="_blank" class="contact-link text-center"><i class="fab fa-instagram text-3xl mb-3 text-primary-accent"></i><p>Instagram</p></a>
+                        <a href="https://whatsapp.com/channel/0029Vb5qJXL8V0tmpfI8x73v" target="_blank" class="contact-link text-center"><i class="fas fa-satellite-dish text-3xl mb-3 text-primary-accent"></i><p>Channel</p></a>
+                        <a href="https://chat.whatsapp.com/GruL0cPiO4AF43ngAEwMmh?mode=ac_t" target="_blank" class="contact-link text-center"><i class="fas fa-satellite-dish text-3xl mb-3 text-primary-accent"></i><p>Group Bot</p></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer><p>© 2025 Wangxien. Built with passion and code.</p></footer>
+
+    <div class="audio-bubble" id="audio-bubble">
+        <div class="audio-bubble-inner">
+            <canvas id="visualizer-canvas"></canvas>
+            <button class="audio-bubble-button" id="play-pause-btn" aria-label="Play/Pause">
+                <svg id="play-icon" viewBox="0 0 384 512" fill="currentColor"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>
+                <svg id="pause-icon" viewBox="0 0 320 512" fill="currentColor" style="display: none;"><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>
+            </button>
+        </div>
+    </div>
+    <audio id="background-music" loop crossorigin="anonymous"><source src="https://files.catbox.moe/371zqh.mp3" type="audio/mp3"></audio>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Spotlight Cursor
+        const body = document.body;
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        body.appendChild(cursor);
+
+        let hasInteracted = false;
+        const enableInteractivity = () => {
+            if (hasInteracted) return;
+            hasInteracted = true;
+            document.removeEventListener('mousemove', enableInteractivity);
+            document.removeEventListener('scroll', enableInteractivity);
+            document.removeEventListener('click', enableInteractivity);
+        };
+        document.addEventListener('mousemove', enableInteractivity);
+        document.addEventListener('scroll', enableInteractivity);
+        document.addEventListener('click', enableInteractivity);
+
+        document.addEventListener('mousemove', e => {
+            if(!hasInteracted) return;
+            body.style.setProperty('--cursor-x', e.clientX + 'px');
+            body.style.setProperty('--cursor-y', e.clientY + 'px');
+            cursor.style.transform = `translate(${e.clientX - 15}px, ${e.clientY - 15}px)`;
+        });
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Parallax Background
+        const auroraWrapper = document.querySelector('.background-wrapper');
+        window.addEventListener('scroll', () => {
+            if(!hasInteracted) return;
+            const scrollY = window.pageYOffset;
+            auroraWrapper.style.transform = `translateY(${scrollY * 0.3}px)`;
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+        document.querySelectorAll('#mobile-menu a, .nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                }
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Typing Effect
+        const jobTitleElement = document.getElementById("job-title-animated");
+        const cursorSpan = document.createElement('span');
+        cursorSpan.id = 'typing-cursor'; cursorSpan.textContent = '|';
+        const jobTitles = ["Freelance", "Bot Creator"];
+        let titleIndex = 0, charIndex = 0, isDeleting = false;
+        function type() {
+            const currentTitle = jobTitles[titleIndex];
+            const text = isDeleting ? currentTitle.substring(0, charIndex - 1) : currentTitle.substring(0, charIndex + 1);
+            jobTitleElement.textContent = text; jobTitleElement.appendChild(cursorSpan);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+            if (!isDeleting && charIndex > currentTitle.length) {
+                isDeleting = true; setTimeout(type, 2000);
+            } else if (isDeleting && charIndex < 0) {
+                isDeleting = false; titleIndex = (titleIndex + 1) % jobTitles.length; setTimeout(type, 500);
+            } else { setTimeout(type, isDeleting ? 75 : 150); }
+        }
+        type();
+
+        // Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.section-card, .timeline-item').forEach(el => observer.observe(el));
+
+        // Audio Visualizer Bubble
+        const audio = document.getElementById("background-music");
+        const playPauseBtn = document.getElementById("play-pause-btn");
+        const playIcon = document.getElementById("play-icon");
+        const pauseIcon = document.getElementById("pause-icon");
+        const bubble = document.getElementById("audio-bubble");
+        const canvas = document.getElementById('visualizer-canvas');
+        const ctx = canvas.getContext('2d');
+        let audioContext, analyser, source, dataArray, isAudioSetup = false;
+
+        function setupAudio() {
+            if (isAudioSetup || !hasInteracted) return;
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                source = audioContext.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioContext.destination);
+                analyser.fftSize = 64;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                isAudioSetup = true;
+                drawVisualizer();
+            } catch (e) { console.error("Web Audio API is not supported.", e); }
+        }
+
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+            if (!isAudioSetup || audio.paused) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
+            analyser.getByteFrequencyData(dataArray);
+            const w = canvas.width = bubble.clientWidth * 2;
+            const h = canvas.height = bubble.clientHeight * 2;
+            ctx.clearRect(0, 0, w, h);
+            const centerX = w / 2; const centerY = h / 2;
+            const radius = 52; const barWidth = 4; const numBars = dataArray.length * 0.8;
+            for (let i = 0; i < numBars; i++) {
+                const barHeight = dataArray[i] * 0.12;
+                const angle = (i / numBars) * 2 * Math.PI + (Date.now() * 0.0001);
+                const x1 = centerX + radius * Math.cos(angle);
+                const y1 = centerY + radius * Math.sin(angle);
+                const x2 = centerX + (radius + barHeight) * Math.cos(angle);
+                const y2 = centerY + (radius + barHeight) * Math.sin(angle);
+                const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+                gradient.addColorStop(0, 'rgba(168, 85, 247, 0.5)');
+                gradient.addColorStop(1, 'rgba(244, 114, 182, 1)');
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = barWidth; ctx.lineCap = 'round';
+                ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+            }
+        }
+        
+        function togglePlay() {
+             if(audioContext && audioContext.state === 'suspended') { audioContext.resume(); }
+            if (!isAudioSetup) { setupAudio(); }
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.style.display = "none"; pauseIcon.style.display = "block";
+                }).catch(e => console.error(e));
+            } else {
+                audio.pause();
+                playIcon.style.display = "block"; pauseIcon.style.display = "none";
+            }
+        }
+        playPauseBtn.addEventListener("click", () => {
+            if(!hasInteracted) {
+                 hasInteracted = true;
+                 // Remove listeners after first interaction
+                 document.body.removeEventListener('click', togglePlay);
+                 document.body.removeEventListener('mousemove', enableInteractivity);
+                 document.body.removeEventListener('scroll', enableInteractivity);
+            }
+            togglePlay();
+        });
+
+        // Only try to play on first interaction, not just click
+        document.body.addEventListener('click', () => {
+             if(!hasInteracted) {
+                hasInteracted = true;
+                togglePlay();
+             }
+        }, { once: true });
+
+    });
+    </script>
+</body>
+</html>
